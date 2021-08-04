@@ -1,0 +1,13 @@
+python train.py --input_name example/zebra --checkpoint_dir ./models
+python train.py --input_name example/moving-gif_00058_parts --checkpoints_dir ./models 
+python train.py --input_name example/moving-gif_00058_mosaic --checkpoints_dir ./models
+python train.py --input_name example/moving-gif_00058_superpixel --checkpoints_dir ./models
+
+python test.py --input_name example/zebra --target_seg_dir example/zebra/cond --output_dir output --exp_path $model_dir$
+python test.py --input_name example/moving-gif_00058 --target_seg_dir example/moving-gif_00058/cond --output_dir output --exp_path models/SemIA_FPSE_moving-gif_00058/expr_1
+python test.py --input_name example/moving-gif_00058_parts --target_seg_dir example/moving-gif_00058_parts/cond --output_dir output --exp_path models/SemIA_FPSE_moving-gif_00058_parts/expr_1 --which_epoch latest
+
+CUDA_VISIBLE_DEVICES=0
+CUDA_VISIBLE_DEVICES=1
+
+CUDA_VISIBLE_DEVICES=0 python train.py --input_name example/moving-gif_00058_parts --checkpoints_dir ./models 
